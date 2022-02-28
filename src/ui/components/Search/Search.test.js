@@ -18,9 +18,21 @@ describe('<Search>', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  test('should fire a callback', () => {
+  test('should fire a callback if valid search', () => {
     render(<Search defaults={mockDefaults} onSubmit={mockHandleSubmit} />);
 
+    fireEvent.click(screen.getByRole('button'));
+
+    expect(mockHandleSubmit).not.toHaveBeenCalled();
+
+    fireEvent.change(
+      screen.getByPlaceholderText(mockDefaults.city),
+      {target: {value: mockDefaults.city}}
+    );
+    fireEvent.change(
+      screen.getByPlaceholderText(mockDefaults.country),
+      {target: {value: mockDefaults.country}}
+    );
     fireEvent.click(screen.getByRole('button'));
 
     expect(mockHandleSubmit).toHaveBeenCalled();

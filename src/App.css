@@ -125,3 +125,8 @@ button:active {
   letter-spacing: 1px;
   font-weight: 200;
 }
+
+[disabled] {
+  opacity: .5;
+  cursor: not-allowed;
+}
